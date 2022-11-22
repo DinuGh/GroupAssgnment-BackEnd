@@ -15,7 +15,11 @@ const advertisementModel = mongoose.Schema(
         publishedDate: Date,
         expiryDate: Date,
         userName: String,
-        questionAnswer: [ {question: String, answer: String} ]
+        questionAnswer: [ {question: String, answer: String} ],
+        owner: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        }
     },
     {
         collection: "advertisement"

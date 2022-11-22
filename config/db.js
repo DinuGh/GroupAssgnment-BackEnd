@@ -1,16 +1,17 @@
-const mongoose = require('mongoose')
+// In real project, never expose your credential in your code.
+let uriDB = require('./config').ATLASDB;
 
-const uri = "mongodb+srv://eric:eric@cluster0.dosf3fq.mongodb.net/products?retryWrites=true&w=majority"
+let mongoose = require('mongoose');
 
-module.exports = function() {
+module.exports = function(){
 
-    mongoose.connect(uri);
+    // Connect to the database
+    mongoose.connect(uriDB);
 
-    const mongodb = mongoose.connection;
-
-    mongodb.on("error", console.error.bind(console, 'Connection Error'));
-    mongodb.once("open", ()=> {
-        console.log('Connected to MongDB');
+    let mongodb = mongoose.connection;
+    mongodb.on('error', console.error.bind(console, 'Connection Error:'));
+    mongodb.once('open', ()=>{
+        console.log('==== Connected to MongoDB ====');
     });
 
     return mongodb;
